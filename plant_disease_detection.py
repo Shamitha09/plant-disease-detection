@@ -1,44 +1,3 @@
-"""
-Plant Disease Detection — CNN (Transfer Learning, PyTorch)
-=============================================================
-Part 2 of the agriculture ML project (for Shamitha's resume / IEEE paper).
-
-WHAT THIS DOES
---------------
-Classifies leaf images into disease categories (e.g. "Tomato___Early_blight",
-"Potato___Late_blight", "Apple___healthy", etc.) using a pretrained ResNet18
-fine-tuned on the PlantVillage dataset. Transfer learning means we reuse a
-model already trained on millions of general images (ImageNet) and just
-retrain the final layers for our leaf categories — much faster and more
-accurate than training a CNN from scratch, and standard practice in the
-literature you'd cite in the IEEE paper.
-
-DATASET
--------
-PlantVillage dataset (the standard benchmark for this task — cited in
-hundreds of papers, so reviewers will recognize it):
-https://www.kaggle.com/datasets/abdallahalidev/plantvillage-dataset
-
-~54,000 images, 38 classes (14 crop species x multiple disease states + healthy).
-
-BEFORE YOU RUN THIS: ENABLE GPU IN COLAB
-------------------------------------------
-In Colab: Runtime -> Change runtime type -> Hardware accelerator -> GPU (T4) -> Save
-Without this, training will be extremely slow (CPU) or may time out.
-
-HOW TO RUN (Google Colab)
----------------------------
-1. Enable GPU (see above) BEFORE running any cells.
-2. If you already set up kaggle.json in a previous session, run:
-       !kaggle datasets download -d abdallahalidev/plantvillage-dataset
-       !unzip -q plantvillage-dataset.zip -d plantvillage
-   (If kaggle.json isn't set up yet, repeat the upload steps from Part 1.)
-3. Paste this whole script into a new cell and run it.
-4. Training will take roughly 15-25 minutes on Colab's free T4 GPU for
-   3 epochs (enough for a strong result; increase EPOCHS if you have time).
-5. Note the final validation accuracy and F1 score printed at the end.
-"""
-
 import os
 import time
 import copy
@@ -52,7 +11,7 @@ from sklearn.metrics import f1_score, classification_report
 # ---------------------------------------------------------------------
 # CONFIG
 # ---------------------------------------------------------------------
-DATA_DIR = "plantvillage/plantvillage dataset/color"  # adjust if the unzip creates a different nested path — check with !ls plantvillage
+DATA_DIR = "plantvillage/plantvillage dataset/color"  
 BATCH_SIZE = 32
 EPOCHS = 3            # bump to 5-8 if you have time; diminishing returns after that
 LEARNING_RATE = 0.001
